@@ -1,6 +1,7 @@
 FROM debian:buster
 
-ENV dns_server 1.1.1.1
+ENV DNS_SERVER 1.1.1.1
+ENV REFRESH_INTERVAL 60
 
 RUN apt-get update -y
 RUN apt-get install -y dnsmasq nano net-tools bmon htop dnsutils python3
