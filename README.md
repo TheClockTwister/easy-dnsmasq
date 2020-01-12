@@ -26,7 +26,7 @@ To deploy the DNS server on your host, you can use the following compose file:
 version: '3.3'
 services:
   own-dnsmasq:
-    image: leonwiesen/easy-dnsmasq:latest
+    image: theclocktwister/easy-dnsmasq:latest
     ports:
      - 53:53/udp
     volumes:
