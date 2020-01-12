@@ -16,21 +16,19 @@ This docker image is meant to supply a minimalistic and flexible DNS-forwarding 
 
 
 ## Deployment
-
-### Deploy simple container
-`docker run -d --cap-add NET_ADMIN -p 53:53/udp --restart always --name easy-dnsmasq theclocktwister/easy-dnsmasq:latest`
-
-### Using "docker-compose" or "docker stack deploy"
-To deploy the DNS server on your host, you can use the following compose file:
+To deploy the DNS server on your host, you can copy the following compose file:
 ```yaml
 version: '3.3'
 services:
   own-dnsmasq:
     image: theclocktwister/easy-dnsmasq:latest
     ports:
-     - 53:53/udp
+      - 53:53/udp
+    environment:
+      DNS_SERVER: 1.1.1.1 # Chosse your primary DNS server
+      REFRESH_INTERVAL: 60 # The interval ro reload the /etc/hosts file and restart dnsmasq
     volumes:
-     - /Services/DNS/hosts.conf:/etc/hosts # static hosts look-up table
+      - /Services/DNS/hosts.conf:/etc/hosts # static hosts look-up table
     restart: always
     cap_add:
       - NET_ADMIN # needed for network stack access
