@@ -3,7 +3,7 @@
 
 This docker image is meant to supply a minimalistic and flexible DNS-forwarding service using [dnsmasq](https://wiki.ubuntuusers.de/Dnsmasq/).
 
-<img src="https://github.com/TheClockTwister/easy-dnsmasq/blob/master/schematic.png">
+<img src="https://raw.githubusercontent.com/TheClockTwister/easy-dnsmasq/master/schematic.png">
 
 
 ## Features
