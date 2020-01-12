@@ -18,7 +18,7 @@ This docker image is meant to supply a minimalistic and flexible DNS-forwarding 
 ## Deployment
 
 ### Deploy simple container
-`docker run -d --cap-add NET_ADMIN -p 53:53/udp --restart always --name easy-dnsmasq leonwiesen/easy-dnsmasq:latest`
+`docker run -d --cap-add NET_ADMIN -p 53:53/udp --restart always --name easy-dnsmasq theclocktwister/easy-dnsmasq:latest`
 
 ### Using "docker-compose" or "docker stack deploy"
 To deploy the DNS server on your host, you can use the following compose file:
