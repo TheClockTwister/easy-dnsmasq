@@ -9,6 +9,7 @@ RUN apt-get install -y dnsmasq nano net-tools bmon wget htop dnsutils python3
 
 ADD blacklists /blacklists
 RUN mkdir /whitelists && chmod 777 /whitelists
+RUN mkdir /blacklist-hosts && chmod 777 /blacklist-hosts
 
 ADD run.py /run.py
 RUN chmod +x /run.py
