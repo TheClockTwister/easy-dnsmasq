@@ -16,7 +16,7 @@ cache-size={cache_size} # DNS cache size (0=off)
 """
 
 # write to config (and override)
-with open("/etc/dnsmasq.conf") as f:
+with open("/etc/dnsmasq.conf","w") as f:
     f.write(config)
 
 
