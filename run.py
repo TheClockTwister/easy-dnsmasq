@@ -32,16 +32,17 @@ def make_host_lists():
                 for line in src.readlines():
                     if line.endswith("\n"):
                         line = line[:-1]
-                    if not line.startswith("#"):
-                        if "localhost" not in line:
-                            for host in whitelist:
-                                if host in line:
-                                    break
-                            else:
-                                if line.startswith("0.0.0.0 "):
-                                    dst.write(f"{line}\n")
+                    if line != "":
+                        if not line.startswith("#"):
+                            if "localhost" not in line:
+                                for host in whitelist:
+                                    if host in line:
+                                        break
                                 else:
-                                    dst.write(f"0.0.0.0 {line}\n")
+                                    if line.startswith("0.0.0.0 "):
+                                        dst.write(f"{line}\n")
+                                    else:
+                                        dst.write(f"0.0.0.0 {line}\n")
 
 
 # Set dnsmasq configs appropriately
