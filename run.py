@@ -15,13 +15,16 @@ cache-size={cache_size} # DNS cache size (0=off)
 
 """
 
-# write to config (and override)
-with open("/etc/dnsmasq.conf","w") as f:
-    f.write(config)
+for file in os.listdir("/blacklists"):
+    print(f"Adding blacklist: /blacklists/{file}.")
+    config += f"addn-hosts=/blacklists/{file}\n"
 
+# write to config (and override)
+with open("/etc/dnsmasq.conf", "w") as f:
+    f.write(config)
 
 # "Etrypoint" for container loop
 while True:
     print("{} - Restarting dnsmasq...".format(time.strftime("%d.%m.%Y %H:%M:%S")))
     os.system("service dnsmasq restart")
-    time.sleep(60*refresh)
+    time.sleep(60 * refresh)
