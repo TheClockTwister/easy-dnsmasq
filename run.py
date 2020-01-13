@@ -39,6 +39,7 @@ def make_host_lists():
                                     if host in line:
                                         break
                                 else:
+                                    print(f"writing {line}")
                                     if line.startswith("0.0.0.0 "):
                                         dst.write(f"{line}\n")
                                     else:
