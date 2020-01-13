@@ -4,8 +4,9 @@ import os
 
 # Get variables from Dockerfile or user arguments
 server = os.getenv("DNS_SERVER")
-refresh = int(os.getenv("REFRESH_INTERVAL")) # in minutes
-cache_size = os.getenv("CACHE_SIZE") # DNS cache size (0=off)
+refresh = int(os.getenv("REFRESH_INTERVAL"))  # in minutes
+cache_size = os.getenv("CACHE_SIZE")  # DNS cache size (0=off)
+blacklist = bool(str(os.getenv("BLACKLIST_FILTER")).capitalize())
 
 # Set dnsmasq configs appropriately
 config = f"""
