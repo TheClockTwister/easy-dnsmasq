@@ -38,7 +38,10 @@ def make_host_lists():
                                 if host in line:
                                     break
                             else:
-                                dst.write(f"0.0.0.0 {line}\n")
+                                if line.startswith("0.0.0.0 "):
+                                    dst.write(f"{line}\n")
+                                else:
+                                    dst.write(f"0.0.0.0 {line}\n")
 
 
 # Set dnsmasq configs appropriately
