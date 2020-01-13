@@ -30,13 +30,17 @@ def make_host_lists():
         with open(os.path.join(blacklist_dir, file), "r") as src:
             with open(os.path.join(blacklist_hosts, file), "w") as dst:
                 for line in src.readlines():
-                    if line.endswith("\n"):
-                        line = line[:-1]
-                    if line != "":
+                    if line != "\n":
+                        print(1)
+                        if line.endswith("\n"):
+                            line = line[:-1]
                         if not line.startswith("#"):
+                            print(2)
                             if "localhost" not in line:
+                                print(3)
                                 for host in whitelist:
                                     if host in line:
+                                        print("break")
                                         break
                                 else:
                                     print(f"writing {line}")
