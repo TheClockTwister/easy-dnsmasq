@@ -11,8 +11,8 @@ This docker image is meant to supply a minimalistic and flexible DNS-forwarding 
 - Easy to handle (like /etc/hosts or C:\Windows\System32\drivers\etc\hosts)
 - Allows multiple failover DNS server
 - DNS caching override (on/off)
+- Custom blacklisting / whitelisting
 - Custon DNS cache size
-
 
 
 ## Deployment
@@ -28,7 +28,9 @@ services:
       DNS_SERVER: 1.1.1.1 # Chosse your primary DNS server
       REFRESH_INTERVAL: 60 # The interval ro reload the /etc/hosts file and restart dnsmasq
     volumes:
-      - /Services/DNS/hosts.conf:/etc/hosts # static hosts look-up table
+      - /.../hosts.conf:/etc/hosts # static hosts look-up table
+      - /.../blacklists/:/blacklists # blacklist folder
+      - /.../whitelists/:/whitelists # whitelist folder
     restart: always
     cap_add:
       - NET_ADMIN # needed for network stack access
@@ -39,3 +41,20 @@ You can specify certain values by using the `-e`option in docker run, or the `en
 
 - `DNS_SERVER` This is the DNS server to forward unknown queries to (default: 1.1.1.1)
 - `REFRESH_INTERVAL` The interval (in minutes) in which the /etc/hosts config is reloaded and dnsmasq restarted (default: 60)
+
+
+## Documentation
+
+### Custom host entries
+If you want the domain "example.com" to be resolved as 10.20.0.1 for instance, add an entry in a file and mount it as a volume into `.../<yourfile>:/etc/hosts` as shown in the example. The entry style is identical with the style used in Windows' and Linux' hosts file:
+```
+10.20.0.15    example.org
+10.20.0.1     s1.example.org
+10.20.0.2     s2.example.org
+```
+
+### Blacklists & whitelists
+If you want DNS requests to a specific domain to be dropped by the easy-dnsmasq server, just insert an entry in a file and make sure it's inside the mounted volume for `/blacklists`. The format is very simple: one domain per line. The same applies to whilelists in the mountable volume `/whitelists`.
+
+
+
