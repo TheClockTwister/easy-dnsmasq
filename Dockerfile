@@ -7,7 +7,7 @@ ENV CACHE_SIZE 0
 RUN apt-get update -y
 RUN apt-get install -y dnsmasq nano net-tools bmon wget htop dnsutils python3
 
-ADD blacklists /blacklists
+RUN mkdir /blacklists && chmod 777 /blacklists
 RUN mkdir /whitelists && chmod 777 /whitelists
 RUN mkdir /blacklist-hosts && chmod 777 /blacklist-hosts
 
